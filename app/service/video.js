@@ -58,9 +58,31 @@ class VideoService extends Service {
       const number = parseInt(query.page);
       const start = number * 10 - 10;
       const degree = parseInt(query.total);
-      const blogList = await this.app.model.Video.findAll({
-        limit: [ start, degree ],
-      });
+
+      let blogList = null;
+      const Sequelize = require('sequelize');
+      const Op = Sequelize.Op;
+      const key = query.key;
+      if (!key) {
+        blogList = await this.app.model.Video.findAll({
+          limit: [ start, degree ],
+        });
+      } else {
+        blogList = await this.app.model.Video.findAll({
+          limit: [ start, degree ],
+          raw: true,
+          order: [
+            [ 'title', 'DESC' ],
+          ], // 排序
+          where: {
+            // name: 'cheny', // 精确查询
+            title: {
+              // 模糊查询
+              [Op.like]: '%' + key + '%',
+            },
+          },
+        });
+      }
       return blogList;
     } catch (error) {
       return null;

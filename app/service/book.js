@@ -24,12 +24,31 @@ class BookService extends Service {
       const number = parseInt(query.page);
       const start = number * 10 - 10;
       const degree = parseInt(query.total);
-      const bookList = await this.app.model.Book.findAll({
-        limit: [ start, degree ],
-        order: [
-          [ 'orderby', 'asc' ],
-        ],
-      });
+
+      let bookList = null;
+      const Sequelize = require('sequelize');
+      const Op = Sequelize.Op;
+      const key = query.key;
+      if (!key) {
+        bookList = await this.app.model.Book.findAll({
+          limit: [ start, degree ],
+        });
+      } else {
+        bookList = await this.app.model.Blog.findAll({
+          limit: [ start, degree ],
+          raw: true,
+          order: [
+            [ 'title', 'DESC' ],
+          ], // 排序
+          where: {
+            // name: 'cheny', // 精确查询
+            title: {
+              // 模糊查询
+              [Op.like]: '%' + key + '%',
+            },
+          },
+        });
+      }
       return bookList;
     } catch (error) {
       return null;

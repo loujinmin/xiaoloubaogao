@@ -61,9 +61,31 @@ class DownloadService extends Service {
       const number = parseInt(query.page);
       const start = number * 10 - 10;
       const degree = parseInt(query.total);
-      const resourceList = await this.app.model.Resource.findAll({
-        limit: [ start, degree ],
-      });
+
+      let resourceList = null;
+      const Sequelize = require('sequelize');
+      const Op = Sequelize.Op;
+      const key = query.key;
+      if (!key) {
+        resourceList = await this.app.model.Resource.findAll({
+          limit: [ start, degree ],
+        });
+      } else {
+        resourceList = await this.app.model.Resource.findAll({
+          limit: [ start, degree ],
+          raw: true,
+          order: [
+            [ 'title', 'DESC' ],
+          ], // 排序
+          where: {
+            // name: 'cheny', // 精确查询
+            title: {
+              // 模糊查询
+              [Op.like]: '%' + key + '%',
+            },
+          },
+        });
+      }
       return resourceList;
     } catch (error) {
       return null;
