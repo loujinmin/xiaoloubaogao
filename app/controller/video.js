@@ -95,7 +95,8 @@ class VideoController extends Controller {
   async getVideoList() {
     const { ctx } = this;
     const ua = checkAgent(ctx.request.header['user-agent']);
-    const data = await this.ctx.service.website.getVideoList();
+    const key = this.ctx.params.key;
+    const data = await this.ctx.service.website.getVideoList(key);
     if (ua) {
       await ctx.render('pc/video.html', data);
     } else {

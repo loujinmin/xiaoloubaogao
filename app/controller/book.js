@@ -24,8 +24,9 @@ class BookController extends Controller {
   // 查看书籍列表
   async index() {
     try {
-      const query = this.ctx.request.query;
-      const bookList = await this.ctx.service.book.getBookList(query);
+      const { page, total } = this.ctx.request.query;
+      const key = this.ctx.params.key;
+      const bookList = await this.ctx.service.book.getBookList({ page, total, key });
       this.ctx.body = {
         code: 20000,
         message: true,

@@ -51,7 +51,7 @@ class WebsitService extends Service {
   }
 
   async getBlogList(query) { // 博客列表
-    const blog = await this.ctx.service.blog.getBlogList({ page: 1, total: 100 }); // 通过query方法获取博客的所有数据
+    const blog = await this.ctx.service.blog.getBlogList(query); // 通过query方法获取博客的所有数据
     const recommendBlog = await this.ctx.service.blog.getBlogList({ page: 1, total: 3 }); // 推荐博客
     const recommendBook = await this.ctx.service.book.getBookList({ page: 1, total: 3 }); // 推荐书
     const title = '博客-小娄报告'; // 标题
@@ -77,8 +77,8 @@ class WebsitService extends Service {
   }
 
 
-  async getResourceList() { // 下载列表
-    const resourceList = await this.ctx.service.resource.getResourceList({ page: 1, total: 100 }); // 获取所有资源
+  async getResourceList(query) { // 下载列表
+    const resourceList = await this.ctx.service.resource.getResourceList(query); // 获取所有资源
     const recommendBook = await this.ctx.service.book.getBookList({ page: 1, total: 1 }); // 推荐书
     const recommendBlog = await this.ctx.service.blog.getBlogList({ page: 1, total: 3 }); // 推荐博客
     const title = '资源下载-小娄报告'; // 标题
@@ -91,8 +91,8 @@ class WebsitService extends Service {
   }
 
 
-  async getVideoList() { // 视频列表
-    const videoList = await this.ctx.service.video.getVideoList({ page: 1, total: 100 }); // 查看所有视频类别以及视频类别所属的视频
+  async getVideoList(key) { // 视频列表
+    const videoList = await this.ctx.service.video.getVideoList({ page: 1, total: 100, key }); // 查看所有视频类别以及视频类别所属的视频
     const recommendBook = await this.ctx.service.book.getBookList({ page: 1, total: 3 }); // 推荐书
     const recommendBlog = await this.ctx.service.blog.getBlogList({ page: 1, total: 3 }); // 推荐博客
     const recommendVideo = await this.ctx.service.video.getVideoList({ page: 1, total: 3 }); // 推荐一个视频

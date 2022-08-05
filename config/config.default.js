@@ -33,7 +33,7 @@ module.exports = appInfo => {
   config.sequelize = {
     dialect: 'mysql',
     database: 'xiaoloucms',
-    host: 'localhost',
+    host: '43.138.110.98',
     port: 3306,
     username: 'root',
     password: 'admin123',

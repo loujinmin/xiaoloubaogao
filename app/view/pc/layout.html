@@ -51,8 +51,8 @@
             </ul>
 
             <from class="search" action="/search">
-                <input type="text" placeholder="搜索" name="searchkey">
-                <button>
+                <input class="inp" type="text" placeholder="搜索" name="searchkey">
+                <button  class="sear">
                     <span class="glyphicon glyphicon-search text-success" aria-hidden="true"></span>
                 </button>
             </from>
@@ -71,6 +71,7 @@
     <script src="/js/phone/bootstrap.min.js"></script>
     <script src="/js/swiper.min.js"></script>
     <script>
+        
         //移入移出
         $(".user ").hover(function () {
             $(".Code ").show();
@@ -134,6 +135,24 @@
                 setLine(4);
                 break;
         }
+
+        $(".sear").click(function (e) {
+            const key = $(".inp").val()
+            console.log(key);
+            if(path === '/blog'){
+                window.document.location.href = `/blog/${key}`
+            }else if(path === '/videos'){
+                window.document.location.href = `/video/${key}`
+            }
+            
+            // $.ajax({
+            //     url: `/api/blog?page=1&total=10&key=${key}`,
+            //     type: 'get'
+            // }).done(res => {
+            //     const blog = res.data
+            //     console.log(blog);
+            // })
+        })
 
         function setLine(index) {
             $(".meun li").eq(index).addClass("active");

@@ -94,9 +94,11 @@ class BlogController extends Controller {
       ctx,
     } = this;
     const ua = checkAgent(ctx.request.header['user-agent']);
+    const key = this.ctx.params.key;
     const data = await this.ctx.service.website.getBlogList({
       page: 1,
       total: 100,
+      key,
     });
     if (ua) {
       await ctx.render('pc/blog.html', data);
@@ -104,6 +106,7 @@ class BlogController extends Controller {
       await ctx.render('phone/blog.html', data);
     }
   }
+
   // 博客详情页面
   async getBlogDetail() {
     const {
