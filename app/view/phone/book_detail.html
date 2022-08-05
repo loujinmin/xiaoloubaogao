@@ -1,4 +1,4 @@
-{% extends "./layout.html" %}
+﻿{% extends "./layout.html" %}
 
 {% block css %}
 <link rel="stylesheet" href="/css/phone/book_detail.css">
@@ -26,7 +26,7 @@
                 <button class="showSection-btn"><img src="/img/pc/右箭头.png" alt=""></button>
                 <a>{{chapter.dataValues.title}}</a>
             </div>
-            <ul class="section">
+            <ul class="section" style="padding-bottom: 1rem">
                 {% for section in chapter.dataValues.sectionList %}
                 <a class="jump" href="/section/{{section.dataValues.id}}">
                     <li festid="{{festiva.id}}">
