@@ -9,16 +9,16 @@ module.exports = app => {
   // 网页
   router.get('/', controller.home.index);
   router.get('/blog', controller.blog.getBlogList);
-  router.get('/blog/:key', controller.blog.getBlogList);
+  router.get('/blogs/:key', controller.blog.getBlogList);
   router.get('/blog/:id', controller.blog.getBlogDetail);
   router.get('/book', controller.book.getBookList);
-  router.get('/book/:key', controller.book.getBookList);
+  router.get('/books/:key', controller.book.getBookList);
   router.get('/book/:id', controller.book.toFirstSection);
   router.get('/section/:id', controller.section.getSectionDetail);
   router.get('/resource', controller.resource.getResourceList);
-  router.get('/resource/:key', controller.resource.getResourceList);
+  router.get('/resources/:key', controller.resource.getResourceList);
   router.get('/video', controller.video.getVideoList);
-  router.get('/video/:key', controller.video.getVideoList);
+  router.get('/videos/:key', controller.video.getVideoList);
   router.get('/video/:id', controller.video.getVideoDetail);
 
   // //后台功能接口
